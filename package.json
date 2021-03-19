@@ -1,0 +1,26 @@
+{
+  "name": "ws_mobile",
+  "version": "0.1.0",
+  "description": "Intro to mobile APIs",
+  "scripts": {
+    "lint": "eslint --ext .js --ext .mjs ./",
+    "start": "http-server stages"
+  },
+  "author": "UoP SoftEng <softeng@port.ac.uk>",
+  "contributors": [
+    "Rich Boakes <rich@boakes.org>",
+    "Jacek Kopecky <jacek@jacek.cz>"
+  ],
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-portsoc": "^0.8.1",
+    "http-server": "^0.12.3"
+  },
+  "eslintConfig": {
+    "extends": "portsoc",
+    "root": true,
+    "env": {
+      "browser": true
+    }
+  }
+}
