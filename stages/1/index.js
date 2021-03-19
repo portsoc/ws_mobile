@@ -2,13 +2,7 @@
 
 import { Worm } from './classes/worm.mjs';
 
-// get a handle on the drawing canvas
-const canvas = document.querySelector('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
-let x = canvas.width / 2;
-let y = canvas.height / 2;
+let worm, x, y, canvas, ctx;
 
 function touchMove(e) {
   e.preventDefault();
@@ -25,18 +19,33 @@ function move(e) {
 function step() {
   ctx.fillStyle = 'rgba(0,0,0,0.1)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  t.moveTowards(x, y);
-  t.draw(ctx);
+  worm.moveTowards(x, y);
+  worm.draw(ctx);
   requestAnimationFrame(step);
 }
 
-const t = new Worm(canvas.width / 2, canvas.height / 2, 80, 30);
 
-// make canvas similar color to what it fades to
-ctx.fillStyle = '#300';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+function init() {
+  // get a handle on the drawing canvas
+  canvas = document.querySelector('canvas');
+  ctx = canvas.getContext('2d');
 
-canvas.addEventListener('mousemove', move);
-canvas.addEventListener('touchstart', touchMove);
-canvas.addEventListener('touchmove', touchMove);
-step();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  x = canvas.width / 2;
+  y = canvas.height / 2;
+
+  // make canvas similar color to what it fades to
+  ctx.fillStyle = '#300';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  canvas.addEventListener('mousemove', move);
+  canvas.addEventListener('touchstart', touchMove);
+  canvas.addEventListener('touchmove', touchMove);
+
+  worm = new Worm(canvas.width / 2, canvas.height / 2, 80, 30);
+
+  step();
+}
+
+window.addEventListener('load', init);
