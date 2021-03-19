@@ -2,25 +2,33 @@
 
 import { Worm } from './classes/worm.mjs';
 
-let worm, x, y, canvas, ctx;
+let canvas, ctx;
+let worm;
+
+function getTouchPosition(touch) {
+  const x = touch.pageX - canvas.offsetLeft;
+  const y = touch.pageY - canvas.offsetTop;
+  return { x, y };
+}
 
 function touchMove(e) {
   e.preventDefault();
-  x = e.changedTouches[0].pageX - canvas.offsetLeft;
-  y = e.changedTouches[0].pageY - canvas.offsetTop;
+  worm.dest = getTouchPosition(e.changedTouches[0]);
 }
-
-function move(e) {
-  x = e.clientX - canvas.offsetLeft;
-  y = e.clientY - canvas.offsetTop;
-}
-
 
 function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  worm.moveTowards(x, y);
+  worm.moveTowards();
   worm.draw(ctx);
   requestAnimationFrame(step);
+}
+
+function mouseToTouch(handler) {
+  return (e) => {
+    e.changedTouches = [e];
+    e.identifier = -1;
+    handler(e);
+  };
 }
 
 
@@ -31,10 +39,8 @@ function init() {
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  x = canvas.width / 2;
-  y = canvas.height / 2;
 
-  canvas.addEventListener('mousemove', move);
+  canvas.addEventListener('mousemove', mouseToTouch(touchMove));
   canvas.addEventListener('touchstart', touchMove);
   canvas.addEventListener('touchmove', touchMove);
 
