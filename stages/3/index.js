@@ -4,6 +4,7 @@ import { Worm } from './classes/worm.mjs';
 
 let canvas, ctx;
 const worms = new Map();
+const retractingWorms = new Set();
 
 function getTouchPosition(touch) {
   const x = touch.pageX - canvas.offsetLeft;
@@ -34,21 +35,30 @@ function touchEnd(e) {
   e.preventDefault();
   for (const touch of e.changedTouches) {
     const worm = worms.get(touch.identifier);
-    worm.startRetracting();
+    worms.delete(touch.identifier);
+    retractingWorms.add(worm);
   }
 }
 
 function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const [id, worm] of worms.entries()) {
-    const moved = worm.moveTowards();
-    if (moved) {
+
+  // draw retracting worms under active worms, so first
+  for (const worm of retractingWorms) {
+    worm.moveTowards();
+    const stillThere = worm.retract();
+    if (stillThere) {
       worm.draw(ctx);
     } else {
-      // the worm is fully retracted -> gone
-      worms.delete(id);
+      retractingWorms.delete(worm);
     }
   }
+
+  for (const worm of worms.values()) {
+    worm.moveTowards();
+    worm.draw(ctx);
+  }
+
   requestAnimationFrame(step);
 }
 

@@ -8,7 +8,6 @@ export class Worm {
     this.size = size;
     this.shapes = [];
     this.dest = { x, y };
-    this.retracting = false;
 
     for (let i = 0; i < this.num; i += 1) {
       const circle = new Circle(
@@ -34,12 +33,6 @@ export class Worm {
       s.moveTowards(prev.x, prev.y);
       prev = { x: s.x, y: s.y };
     }
-
-    if (this.retracting) {
-      return this.retract() > 0;
-    } else {
-      return true;
-    }
   }
 
   retract() {
@@ -53,11 +46,7 @@ export class Worm {
       shape.r *= 0.98;
     }
 
-    return this.shapes.length;
-  }
-
-  startRetracting() {
-    this.retracting = true;
+    return this.shapes.length > 0;
   }
 }
 
