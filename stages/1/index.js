@@ -1,6 +1,6 @@
 'use strict';
 
-import { Tentacle } from './classes/tentacle.mjs';
+import { Worm } from './classes/worm.mjs';
 
 // get a handle on the drawing canvas
 const canvas = document.querySelector('canvas');
@@ -23,14 +23,14 @@ function move(e) {
 
 
 function step() {
-  ctx.fillStyle = 'rgba(0,0,0,0.01)';
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   t.moveTowards(x, y);
   t.draw(ctx);
   requestAnimationFrame(step);
 }
 
-const t = new Tentacle(canvas.width / 2, canvas.height / 2, 180, 3);
+const t = new Worm(canvas.width / 2, canvas.height / 2, 80, 30);
 
 // make canvas similar color to what it fades to
 ctx.fillStyle = '#300';
