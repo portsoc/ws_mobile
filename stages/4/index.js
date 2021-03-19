@@ -43,7 +43,7 @@ function touchEnd(e) {
 }
 
 function handleOrientation(e) {
-  const G = 0.1;
+  const G = 0.3;
   gravity.y = e.beta * G;
   gravity.x = e.gamma * G;
 }
