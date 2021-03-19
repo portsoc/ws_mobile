@@ -1,6 +1,7 @@
 'use strict';
 
 import { Worm } from './classes/worm.mjs';
+import * as heading from './heading-calculator.mjs';
 
 let canvas, ctx;
 const worms = new Map();
@@ -47,14 +48,15 @@ function handleLocation({ coords }) {
     lat: 50.79848979556136,
     lon: -1.098500458185442,
   };
+  const G = 6;
 
-  const dLat = coords.latitude - BUCKINGHAM.lat;
-  const dLon = coords.longitude - BUCKINGHAM.lon;
+  const angle = heading.calculate(
+    coords.latitude, coords.longitude,
+    BUCKINGHAM.lat, BUCKINGHAM.lon,
+  );
 
-  const dist = Math.max(Math.hypot(dLat, dLon) / 10, 0.000001);
-
-  gravity.y = dLat / dist;
-  gravity.x = -dLon / dist;
+  gravity.y = -Math.cos(heading.rad(angle)) * G;
+  gravity.x = Math.sin(heading.rad(angle)) * G;
 }
 
 function step() {
