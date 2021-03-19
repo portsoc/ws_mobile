@@ -33,21 +33,15 @@ function touchStart(e) {
 function touchEnd(e) {
   e.preventDefault();
   for (const touch of e.changedTouches) {
-    const worm = worms.get(touch.identifier);
-    worm.startRetracting();
+    worms.delete(touch.identifier);
   }
 }
 
 function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const [id, worm] of worms.entries()) {
-    const moved = worm.moveTowards();
-    if (moved) {
-      worm.draw(ctx);
-    } else {
-      // the worm is fully retracted -> gone
-      worms.delete(id);
-    }
+  for (const worm of worms.values()) {
+    worm.moveTowards();
+    worm.draw(ctx);
   }
   requestAnimationFrame(step);
 }
