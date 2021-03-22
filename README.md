@@ -18,10 +18,14 @@
 
    * draw retracting worms under active worms
 
-4. add gravity ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-4))
+4. add orientation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-4))
 
    * each worm is "hanging" off of the finger
-   * the direction and strength of gravity comes from the phone's orientation
+   * the direction and strength of orientation comes from the phone's orientation
+
+5. replace orientation with gravity and acceleration ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-5))
+
+   * the direction and gravity and acceleration comes from the phone's accelerometer
 
 6. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-6))
 
