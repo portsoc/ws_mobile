@@ -3,18 +3,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation</title>
 
-<p><progress id=alpha min=0 max=360 value=180></progress> Alpha
-<p><progress id=beta min=0 max=360 value=180></progress> Beta
-<p><progress id=gamma min=0 max=360 value=180></progress> Gamma
+<p><input type=range id=alpha min=0 max=360 value=0> Alpha
+<p><input type=range id=beta min="-180" max=180 value=0> Beta
+<p><input type=range id=gamma min="-90" max=90 value=0> Gamma
 
 <output>
 </output>
 
 <script>
   function handleTouch(e) {
-    document.querySelector('#alpha').value = 180 + e.alpha;
-    document.querySelector('#beta').value = 180 + e.beta;
-    document.querySelector('#gamma').value = 180 + e.gamma;
+    document.querySelector('#alpha').value = e.alpha;
+    document.querySelector('#beta').value = e.beta;
+    document.querySelector('#gamma').value = e.gamma;
   }
 
   window.addEventListener('deviceorientation', handleTouch);
