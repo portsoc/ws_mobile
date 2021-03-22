@@ -105,6 +105,7 @@ function init() {
   canvas.addEventListener('touchstart', touchStart);
   canvas.addEventListener('touchmove', touchMove);
   canvas.addEventListener('touchend', touchEnd);
+  canvas.addEventListener('touchcancel', touchEnd);
 
   navigator.geolocation.watchPosition(handleLocation);
 

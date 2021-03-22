@@ -94,6 +94,7 @@ function init() {
   canvas.addEventListener('touchstart', touchStart);
   canvas.addEventListener('touchmove', touchMove);
   canvas.addEventListener('touchend', touchEnd);
+  canvas.addEventListener('touchcancel', touchEnd);
 
   window.addEventListener('deviceorientation', handleOrientation, true);
 
