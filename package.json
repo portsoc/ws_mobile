@@ -4,7 +4,7 @@
   "description": "Intro to mobile APIs",
   "scripts": {
     "lint": "eslint --ext .js --ext .mjs ./",
-    "start": "http-server stages"
+    "start": "http-server"
   },
   "author": "UoP SoftEng <softeng@port.ac.uk>",
   "contributors": [
