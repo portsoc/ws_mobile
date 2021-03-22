@@ -9,9 +9,11 @@ const retractingWorms = new Set();
 const gravity = { x: 0, y: 0 };
 
 function getTouchPosition(touch) {
-  const x = touch.pageX - canvas.offsetLeft;
-  const y = touch.pageY - canvas.offsetTop;
-  return { x, y };
+  // relying on the canvas located flush with the top-left corner of the page
+  return {
+    x: touch.pageX,
+    y: touch.pageY,
+  };
 }
 
 function touchMove(e) {
