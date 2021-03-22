@@ -4,30 +4,30 @@
 
 1. following from stage 16 of [`ws_objects1`](https://github.com/portsoc/ws_objects1):
 
-  * we have a Worm rather than a Tentacle
-  * the colours are yellow -> purple to allow use in video with chrome keying
-  * touch code has been improved so the interface is touch-oriented – mouse events are turned into touch-like events
+   * we have a Worm rather than a Tentacle
+   * the colours are yellow -> purple to allow use in video with chrome keying
+   * touch code has been improved so the interface is touch-oriented – mouse events are turned into touch-like events
 
 2. add multi-touch ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-2))
 
-  * have multiple worms (none at start)
-  * create worms on `touchstart`
-  * remove worms on `touchend`
+   * have multiple worms (none at start)
+   * create worms on `touchstart`
+   * remove worms on `touchend`
 
 3. make worms retract on `touchend` ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-3))
 
-  * draw retracting worms under active worms
+   * draw retracting worms under active worms
 
 4. add gravity ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-4))
 
-  * each worm is "hanging" off of the finger
-  * the direction and strength of gravity comes from the phone's orientation
+   * each worm is "hanging" off of the finger
+   * the direction and strength of gravity comes from the phone's orientation
 
 5. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-5))
 
-  * now each worm is attracted towards Portsmouth Uni's Buckingham Building
-  * the phone's location comes from the geolocation API
-  * the calculation uses a Great Circle heading
+   * now each worm is attracted towards Portsmouth Uni's Buckingham Building
+   * the phone's location comes from the geolocation API
+   * the calculation uses a Great Circle heading
 
 ## Ideas for tweaking (exercises for the reader)
 
