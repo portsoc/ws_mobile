@@ -6,6 +6,7 @@ let canvas, ctx;
 let r = 15;
 const worms = new Map();
 const retractingWorms = new Set();
+const gravity = { x: 0, y: 0 };
 
 function getTouchPosition(touch) {
   // relying on the canvas located flush with the top-left corner of the page
@@ -30,6 +31,7 @@ function touchStart(e) {
   for (const touch of e.changedTouches) {
     const { x, y } = getTouchPosition(touch);
     const worm = new Worm(x, y, 80, r);
+    worm.gravity = gravity;
     worms.set(touch.identifier, worm);
   }
 }
@@ -41,6 +43,12 @@ function touchEnd(e) {
     worms.delete(touch.identifier);
     retractingWorms.add(worm);
   }
+}
+
+function handleOrientation(e) {
+  const G = 0.1;
+  gravity.y = e.beta * G;
+  gravity.x = e.gamma * G;
 }
 
 function step() {
@@ -93,6 +101,8 @@ function init() {
   canvas.addEventListener('touchmove', touchMove);
   canvas.addEventListener('touchend', touchEnd);
   canvas.addEventListener('touchcancel', touchEnd);
+
+  window.addEventListener('deviceorientation', handleOrientation, true);
 
   step();
 }

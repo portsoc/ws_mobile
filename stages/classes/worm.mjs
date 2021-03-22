@@ -8,6 +8,7 @@ export class Worm {
     this.size = size;
     this.shapes = [];
     this.dest = { x, y };
+    this.gravity = { x: 0, y: 0 };
 
     for (let i = 0; i < this.num; i += 1) {
       const circle = new Circle(
@@ -30,7 +31,7 @@ export class Worm {
     let prev = { x, y };
     for (let i = this.shapes.length - 1; i >= 0; i--) {
       const s = this.shapes[i];
-      s.moveTowards(prev.x, prev.y);
+      s.moveTowards(prev.x + this.gravity.x, prev.y + this.gravity.y);
       prev = { x: s.x, y: s.y };
     }
   }
