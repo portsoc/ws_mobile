@@ -45,10 +45,9 @@ function touchEnd(e) {
   }
 }
 
-function handleOrientation(e) {
-  const G = 0.1;
-  gravity.y = e.beta * G;
-  gravity.x = e.gamma * G;
+function handleMotion(e) {
+  gravity.y = e.accelerationIncludingGravity.y;
+  gravity.x = -e.accelerationIncludingGravity.x;
 }
 
 function step() {
@@ -102,7 +101,7 @@ function init() {
   canvas.addEventListener('touchend', touchEnd);
   canvas.addEventListener('touchcancel', touchEnd);
 
-  window.addEventListener('deviceorientation', handleOrientation, true);
+  window.addEventListener('devicemotion', handleMotion, true);
 
   step();
 }
