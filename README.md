@@ -23,7 +23,7 @@
    * each worm is "hanging" off of the finger
    * the direction and strength of gravity comes from the phone's orientation
 
-5. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-5))
+6. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-6))
 
    * now each worm is attracted towards Portsmouth Uni's Buckingham Building
    * the phone's location comes from the geolocation API
