@@ -3,6 +3,7 @@
 import { Worm } from './classes/worm.mjs';
 
 let canvas, ctx;
+let r = 15;
 const worms = new Map();
 const retractingWorms = new Set();
 const gravity = { x: 0, y: 0 };
@@ -29,7 +30,7 @@ function touchStart(e) {
   e.preventDefault();
   for (const touch of e.changedTouches) {
     const { x, y } = getTouchPosition(touch);
-    const worm = new Worm(x, y, 80, 30);
+    const worm = new Worm(x, y, 80, r);
     worm.gravity = gravity;
     worms.set(touch.identifier, worm);
   }
@@ -87,6 +88,9 @@ function init() {
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  // set worm radius to be 1% of screen length
+  r = Math.max(canvas.width, canvas.height) / 100;
 
   canvas.addEventListener('mousedown', mouseToTouch(touchStart));
   canvas.addEventListener('mousemove', mouseToTouch(touchMove));

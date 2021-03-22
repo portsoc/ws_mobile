@@ -46,5 +46,5 @@
 * don't let the worm collapse under the head, have a minimal distance below which a circle in a worm doesn't move closer to a previous circle
   – this way we could draw a worm and only when it becomes full length, it starts moving towards the finger
 * stage 4 behaves strangely at some angles (e.g. with the display facing down); the code currently does not understand the angles at all but it could.
-* stage 5 could make the worm shorter or longer depending on your distance from Buckingham Building
-* stage 5 could be adapted with a server to point towards a random other user of the app
+* stage 6 could make the worm shorter or longer depending on your distance from Buckingham Building
+* stage 6 could be adapted with a server to point towards a random other user of the app

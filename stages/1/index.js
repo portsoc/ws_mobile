@@ -3,7 +3,7 @@
 import { Worm } from './classes/worm.mjs';
 
 let canvas, ctx;
-let worm;
+let r, worm;
 
 function getTouchPosition(touch) {
   // relying on the canvas located flush with the top-left corner of the page
@@ -42,11 +42,14 @@ function init() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
+  // set worm radius to be 1% of screen length
+  r = Math.max(canvas.width, canvas.height) / 100;
+
   canvas.addEventListener('mousemove', mouseToTouch(touchMove));
   canvas.addEventListener('touchstart', touchMove);
   canvas.addEventListener('touchmove', touchMove);
 
-  worm = new Worm(canvas.width / 2, canvas.height / 2, 80, 30);
+  worm = new Worm(canvas.width / 2, canvas.height / 2, 80, r);
 
   step();
 }
