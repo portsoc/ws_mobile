@@ -1,6 +1,7 @@
 'use strict';
 
 import { Worm } from './classes/worm.mjs';
+import * as heading from './heading-calculator.mjs';
 
 let canvas, ctx;
 let r = 15;
@@ -45,9 +46,20 @@ function touchEnd(e) {
   }
 }
 
-function handleMotion(e) {
-  gravity.y = e.accelerationIncludingGravity.y;
-  gravity.x = -e.accelerationIncludingGravity.x;
+function handleLocation({ coords }) {
+  const BUCKINGHAM = {
+    lat: 50.79848979556136,
+    lon: -1.098500458185442,
+  };
+  const G = 6;
+
+  const angle = heading.calculate(
+    coords.latitude, coords.longitude,
+    BUCKINGHAM.lat, BUCKINGHAM.lon,
+  );
+
+  gravity.y = -Math.cos(heading.rad(angle)) * G;
+  gravity.x = Math.sin(heading.rad(angle)) * G;
 }
 
 function step() {
@@ -101,7 +113,7 @@ function init() {
   canvas.addEventListener('touchend', touchEnd);
   canvas.addEventListener('touchcancel', touchEnd);
 
-  window.addEventListener('devicemotion', handleMotion, true);
+  navigator.geolocation.watchPosition(handleLocation);
 
   step();
 }
