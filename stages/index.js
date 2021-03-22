@@ -3,7 +3,8 @@
 import { Worm } from './classes/worm.mjs';
 
 let canvas, ctx;
-let r, worm;
+let r = 15;
+const worms = new Map();
 
 function getTouchPosition(touch) {
   // relying on the canvas located flush with the top-left corner of the page
@@ -15,13 +16,36 @@ function getTouchPosition(touch) {
 
 function touchMove(e) {
   e.preventDefault();
-  worm.dest = getTouchPosition(e.changedTouches[0]);
+  for (const touch of e.changedTouches) {
+    const worm = worms.get(touch.identifier);
+    if (worm) {
+      worm.dest = getTouchPosition(touch);
+    }
+  }
+}
+
+function touchStart(e) {
+  e.preventDefault();
+  for (const touch of e.changedTouches) {
+    const { x, y } = getTouchPosition(touch);
+    const worm = new Worm(x, y, 80, r);
+    worms.set(touch.identifier, worm);
+  }
+}
+
+function touchEnd(e) {
+  e.preventDefault();
+  for (const touch of e.changedTouches) {
+    worms.delete(touch.identifier);
+  }
 }
 
 function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  worm.moveTowards();
-  worm.draw(ctx);
+  for (const worm of worms.values()) {
+    worm.moveTowards();
+    worm.draw(ctx);
+  }
   requestAnimationFrame(step);
 }
 
@@ -45,11 +69,14 @@ function init() {
   // set worm radius to be 1% of screen length
   r = Math.max(canvas.width, canvas.height) / 100;
 
+  canvas.addEventListener('mousedown', mouseToTouch(touchStart));
   canvas.addEventListener('mousemove', mouseToTouch(touchMove));
-  canvas.addEventListener('touchstart', touchMove);
-  canvas.addEventListener('touchmove', touchMove);
+  canvas.addEventListener('mouseup', mouseToTouch(touchEnd));
 
-  worm = new Worm(canvas.width / 2, canvas.height / 2, 80, r);
+  canvas.addEventListener('touchstart', touchStart);
+  canvas.addEventListener('touchmove', touchMove);
+  canvas.addEventListener('touchend', touchEnd);
+  canvas.addEventListener('touchcancel', touchEnd);
 
   step();
 }
