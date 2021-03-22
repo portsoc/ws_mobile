@@ -5,6 +5,7 @@ import { Worm } from './classes/worm.mjs';
 let canvas, ctx;
 let r = 15;
 const worms = new Map();
+const retractingWorms = new Set();
 
 function getTouchPosition(touch) {
   // relying on the canvas located flush with the top-left corner of the page
@@ -36,16 +37,31 @@ function touchStart(e) {
 function touchEnd(e) {
   e.preventDefault();
   for (const touch of e.changedTouches) {
+    const worm = worms.get(touch.identifier);
     worms.delete(touch.identifier);
+    retractingWorms.add(worm);
   }
 }
 
 function step() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // draw retracting worms under active worms, so first
+  for (const worm of retractingWorms) {
+    worm.moveTowards();
+    const stillThere = worm.retract();
+    if (stillThere) {
+      worm.draw(ctx);
+    } else {
+      retractingWorms.delete(worm);
+    }
+  }
+
   for (const worm of worms.values()) {
     worm.moveTowards();
     worm.draw(ctx);
   }
+
   requestAnimationFrame(step);
 }
 

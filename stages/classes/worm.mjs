@@ -34,6 +34,20 @@ export class Worm {
       prev = { x: s.x, y: s.y };
     }
   }
+
+  retract() {
+    // remove the worm's head
+    const head = this.shapes.pop();
+    this.dest.x = head.x;
+    this.dest.y = head.y;
+
+    // make the worm thinner
+    for (const shape of this.shapes) {
+      shape.r *= 0.98;
+    }
+
+    return this.shapes.length > 0;
+  }
 }
 
 function makeColour(i, num) {
