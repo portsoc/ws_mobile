@@ -3,7 +3,7 @@ import { Circle } from './circle.mjs';
 export class Tentacle {
 
 
-  constructor(x, y, num, size) {
+  constructor(x, y, num, size, coloff = 0) {
     this.x = x;
     this.y = y;
     this.num = num;
@@ -11,13 +11,14 @@ export class Tentacle {
     this.shapes = [];
     this.dest = { x, y };
     this.gravity = { x: 0, y: 0 };
+    this.coloff = coloff;
 
     for (let i = 0; i < this.num; i += 1) {
       const circle = new Circle(
         this.x,
         this.y,
         (this.num - i) * this.size,
-        makeColour(i, num),
+        makeColour(i, num, this.coloff),
       );
       this.shapes.push(circle);
     }
@@ -54,6 +55,6 @@ export class Tentacle {
   }
 }
 
-function makeColour(i, num) {
-  return `hsl(${i * 120 / num - 60}deg, 100%, 50%)`;
+function makeColour(i, num, coloff) {
+  return `hsl(${coloff + i * 120 / num - 60}deg, 100%, 50%)`;
 }

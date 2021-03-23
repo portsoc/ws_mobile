@@ -11,7 +11,7 @@ export class Shape {
   }
 
   moveTowards(x, y) {
-    this.x -= (this.x - x) / 2;
-    this.y -= (this.y - y) / 2;
+    this.x -= (this.x - x) / 10;
+    this.y -= (this.y - y) / 10;
   }
 }

@@ -2,7 +2,7 @@
 
 import { Tentacle } from './classes/tentacle.mjs';
 
-const NUM = 80;
+const NUM = 20;
 const tentacles = new Map();
 const retractingTentacles = new Set();
 const gravity = { x: 0, y: 0 };
@@ -32,7 +32,7 @@ function touchStart(e) {
   e.preventDefault();
   for (const touch of e.changedTouches) {
     const { x, y } = getTouchPosition(touch);
-    const tentacle = new Tentacle(x, y, NUM, radius);
+    const tentacle = new Tentacle(x, y, NUM, radius, Math.random()*360);
     tentacle.gravity = gravity;
     tentacles.set(touch.identifier, tentacle);
   }
