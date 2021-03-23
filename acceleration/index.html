@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orientation</title>
+
+<p>Without gravity (m/s²):
+<p><input type=range id=x min=0 max=1 value=0> X <span class="value"></span>
+<p><input type=range id=y min=0 max=1 value=0> Y <span class="value"></span>
+<p><input type=range id=z min=0 max=1 value=0> Z <span class="value"></span>
+<p>With gravity (m/s²):
+<p><input type=range id=xg min=0 max=1 value=0> X <span class="value"></span>
+<p><input type=range id=yg min=0 max=1 value=0> Y <span class="value"></span>
+<p><input type=range id=zg min=0 max=1 value=0> Z <span class="value"></span>
+<p>Rotation rate (°/s):
+<p><input type=range id=alpha min=0 max=1 value=0> Alpha <span class="value"></span>
+<p><input type=range id=beta min=0 max=1 value=0> Beta <span class="value"></span>
+<p><input type=range id=gamma min=0 max=1 value=0> Gamma <span class="value"></span>
+
+<script>
+  function update(selector, value) {
+    const rangeEl = document.querySelector(selector);
+    if (Number(rangeEl.min) > value) rangeEl.min = value;
+    if (Number(rangeEl.max) < value) rangeEl.max = value;
+    rangeEl.value = value;
+
+    const valueEl = document.querySelector(selector + ' ~ .value');
+    if (valueEl) {
+      valueEl.textContent = value.toFixed(2);
+    }
+  }
+
+  function reportAcceleration(e) {
+    update('#x', e.acceleration.x);
+    update('#y', e.acceleration.y);
+    update('#z', e.acceleration.z);
+    update('#xg', e.accelerationIncludingGravity.x);
+    update('#yg', e.accelerationIncludingGravity.y);
+    update('#zg', e.accelerationIncludingGravity.z);
+    update('#alpha', e.rotationRate.alpha);
+    update('#beta', e.rotationRate.beta);
+    update('#gamma', e.rotationRate.gamma);
+  }
+
+  window.addEventListener('devicemotion', reportAcceleration);
+</script>
