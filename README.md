@@ -2,32 +2,32 @@
 
 ## Stages
 
-1. following from stage 16 of [`ws_objects1`](https://github.com/portsoc/ws_objects1):
+1. following from stage 16 of [`ws_objects1`](https://github.com/portsoc/ws_objects1) ([try it](https://portsoc.github.io/ws_mobile/stages/1/)):
 
    * we have a Worm rather than a Tentacle
-   * the colours are yellow -> purple to allow use in video with chrome keying
+   * the colours are yellow -> purple to allow use in video with chroma-keying
    * touch code has been improved so the interface is touch-oriented – mouse events are turned into touch-like events
 
-2. add multi-touch ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-2))
+2. add multi-touch ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-2) - [try it](https://portsoc.github.io/ws_mobile/stages/2/))
 
    * have multiple worms (none at start)
    * create worms on `touchstart`
    * remove worms on `touchend`
 
-3. make worms retract on `touchend` ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-3))
+3. make worms retract on `touchend` ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-3) - [try it](https://portsoc.github.io/ws_mobile/stages/3/))
 
    * draw retracting worms under active worms
 
-4. add orientation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-4))
+4. add orientation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-4) - [try it](https://portsoc.github.io/ws_mobile/stages/4/))
 
    * each worm is "hanging" off of the finger
    * the direction and strength of orientation comes from the phone's orientation
 
-5. replace orientation with gravity and acceleration ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-5))
+5. replace orientation with gravity and acceleration ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-5) - [try it](https://portsoc.github.io/ws_mobile/stages/5/))
 
    * the direction and gravity and acceleration comes from the phone's accelerometer
 
-6. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-6))
+6. replace gravity with geolocation ([see the diff](https://github.com/portsoc/ws_mobile/commit/stage-6) - [try it](https://portsoc.github.io/ws_mobile/stages/6/))
 
    * now each worm is attracted towards Portsmouth Uni's Buckingham Building
    * the phone's location comes from the geolocation API
